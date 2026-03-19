@@ -1,0 +1,421 @@
+/* 1. المتغيرات العامة - Clean Code Root */
+:root {
+    --primary-color: #3182ce;
+    --secondary-gradient: linear-gradient(180deg, #2c5282 0%, #4299e1 100%);
+    --bg-color: #f4f7fa;
+    --text-dark: #2d3748;
+    --text-gray: #4a5568;
+    --white: #ffffff;
+    --sidebar-width: 260px;
+}
+ 
+/* 2. التنسيقات الأساسية */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    display: flex;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+}
+/* --- زر الهامبرغر --- */
+.menu-toggle {
+    display: block; 
+    position: fixed;
+    top: 15px;
+    z-index: 9999;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+[dir="rtl"] .menu-toggle { right: 15px; }
+[dir="ltr"] .menu-toggle { left: 15px; }
+
+/* --- السايد بار --- */
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: var(--secondary-gradient);
+    color: var(--white);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column; /* مهم جداً لتوزيع العناصر عمودياً */
+}
+/* حركة نبض خفيفة لأيقونة الأوديو */
+.nav-item:hover .fa-wave-square {
+    animation: sound-pulse 0.5s infinite alternate;
+}
+
+@keyframes sound-pulse {
+    from { transform: scaleY(1); }
+    to { transform: scaleY(1.3); }
+}
+/* حالة الإغلاق */
+[dir="rtl"] .sidebar.inactive { right: -280px; }
+[dir="ltr"] .sidebar.inactive { left: -280px; }
+
+/* --- الفوتر (النزول للأسفل) --- */
+.sidebar-footer {
+    margin-top: auto; /* هذا يدفع كل ما في الفوتر للأسفل */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.lang-switch { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    margin-bottom: 20px; /* مسافة بين اللغات وزر الدخول */
+}
+
+/* --- المحتوى الرئيسي --- */
+.main-content {
+    flex-grow: 1;
+    padding-top: 80px; /* مساحة علوية للزر */
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: 0.4s ease;
+    margin-right: 280px; /* مسافة السايد بار في العربي */
+}
+
+[dir="ltr"] .main-content {
+    margin-right: 0;
+    margin-left: 280px;
+}
+
+/* عند الإغلاق: المحتوى يأخذ كامل العرض */
+.main-content.full-width {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.sidebar h2 { 
+    font-size: 22px; 
+    margin-bottom: 30px; 
+    text-align: center; 
+    padding-top: 10px;
+}
+/* --- 3. الروابط والعناصر --- */
+.nav-links { flex-grow: 1; }
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    text-decoration: none !important;
+    color: var(--white);
+    font-weight: 500;
+}
+
+.nav-item span { margin-left: 10px; margin-right: 10px; }
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* خط التميز للقسم المختار (ذهبي) */
+[dir="ltr"] .nav-item.active { border-left: 5px solid #f6ad55; }
+[dir="rtl"] .nav-item.active { border-right: 5px solid #f6ad55; }
+
+/* --- 4. الفواصل القوية (التي طلبتها) --- */
+.sidebar-divider {
+    border: 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin: 15px 0;
+}
+
+.sidebar-footer {
+    padding-top: 20px;
+    border-top: 4px solid rgba(255, 255, 255, 0.7); /* خط طوخ جداً وواضح */
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px;
+}
+
+.lang-switch { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.5); /* خط طوخ تحت اللغات */
+    margin-bottom: 10px;
+}
+
+.lang-switch a {
+    color: var(--white); 
+    text-decoration: none; 
+    font-size: 14px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.3); 
+    padding: 6px 15px; 
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.lang-switch a:hover { background: rgba(255,255,255,0.2); }
+
+/* زر الدخول */
+.login-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: rgba(17, 42, 181, 0.6); 
+    color: var(--white);
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+/* --- 5. المحتوى الرئيسي --- */
+.main-content {margin: 0 !important;
+    width: 100%;
+    padding: 80px 20px 40px 20px; /* مساحة للزر في الأعلى */
+    transition: 0.3s;
+}
+
+
+.sidebar {
+    /* ... خصائصك السابقة ... */
+    z-index: 1000; /* السايد بار دائماً في الأعلى */
+}
+
+/* 4. المحتوى الرئيسي والكروت */
+.main-content { padding: 40px; width: 100%; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+.card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.tool-logo {
+    width: 50px;
+    height: 50px;
+    min-width: 50px; /* منع تصغير الصورة في الشاشات الصغيرة */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.description { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px; }
+
+.open-btn {
+    display: block; width: 100%; padding: 12px;
+    background: var(--primary-color); color: var(--white);
+    text-align: center; border-radius: 8px; text-decoration: none;
+    font-weight: 600; transition: 0.3s;
+}
+
+.open-btn:hover { background: #2b6cb0; }
+/* 5. التجاوب - Responsiveness */
+
+/* للشاشات التي أقل من 992px (التابلت) */
+@media (max-width: 992px) {
+    :root {
+        --sidebar-width: 80px; /* تصغير عرض السايد بار */
+    }
+    
+    .nav-item span {
+        margin: 0;
+        font-size: 24px;
+    }
+    
+    .nav-item {
+        justify-content: center;
+        padding: 15px 5px;
+    }
+    
+    /* إخفاء النصوص في السايد بار لإبقاء الأيقونات فقط */
+    .sidebar h2, 
+    .nav-item {
+        font-size: 0; 
+    }
+    
+    .nav-item span {
+        font-size: 20px;
+    }
+
+    .sidebar-footer button {
+        display: none; /* إخفاء زر الدخول في التابلت */
+    }
+}
+
+/* للشاشات التي أقل من 768px (الموبايل) */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* جعل العناصر تحت بعضها */
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 10px;
+    }
+
+    /* تحويل السايد بار إلى منيو أفقي في الموبايل */
+    .nav-links {
+        display: flex;
+        overflow-x: auto; /* السماح بالتمرير الأفقي للأقسام */
+        gap: 10px;
+        padding-bottom: 5px;
+    }
+
+    .nav-item {
+        flex: 0 0 auto;
+        margin-bottom: 0;
+        font-size: 14px !important;
+        white-space: nowrap;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 20px;
+    }
+
+    [dir="ltr"] .main-content, 
+    [dir="rtl"] .main-content {
+        margin: 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr; /* كارت واحد في كل صف */
+    }
+    
+    .details-container {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .details-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.prompt-card {
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border-left: 5px solid #007bff;
+}
+.border-gold {
+    border-left: 5px solid #ffc107; /* تمييز البرومبت الأساسي */
+}
+.badge {
+    background: #ffc107;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.btn-primary {
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+}
+/* التنسيق الخاص بالموبايل (شاشات أصغر من 768 بكسل) */
+@media (max-width: 768px) {
+    /* زر الهامبرغر */
+    .menu-toggle { 
+        display: block !important; 
+        position: fixed;
+        top: 15px;
+        z-index: 1100;
+    }
+
+    /* السايد بار - تعديل طريقة عرض المحتوى */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 260px !important; 
+        z-index: 1000;
+        background: var(--primary-color);
+        display: flex !important;
+        flex-direction: column !important;
+        /* السطرين القادمين لضمان أن العناصر تبدأ من الأعلى ولا تتجمع في الوسط */
+        justify-content: flex-start !important; 
+        align-items: stretch !important; 
+        padding-top: 60px !important; /* مسافة لكي لا يختفي المحتوى تحت زر الهامبرغر */
+        overflow-y: auto !important; /* للسماح بالتمرير إذا كانت الأقسام كثيرة */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* التحكم في اتجاه الظهور حسب اللغة */
+    [dir="rtl"] .sidebar { right: -270px; left: auto; }
+    [dir="ltr"] .sidebar { left: -270px; right: auto; }
+
+    [dir="rtl"] .sidebar.active { transform: translateX(-270px); }
+    [dir="ltr"] .sidebar.active { transform: translateX(270px); }
+
+    /* تنسيق العناصر لتبدو واضحة وبطول السايد بار */
+    .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .nav-item {
+        display: flex !important;
+        align-items: center !important;
+        padding: 15px 20px !important;
+        color: white !important;
+        font-size: 1.1rem !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* خط خفيف بين الأقسام */
+    }
+
+    .nav-icon {
+        margin-left: 10px; /* مسافة للأيقونة في العربي */
+        margin-right: 10px; /* مسافة للأيقونة في الإنجليزي */
+        min-width: 30px;
+        text-align: center;
+    }
+
+    /* إخفاء السايد بار القديم إذا كان يؤثر على الشكل */
+    .sidebar-header h2 {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+}
