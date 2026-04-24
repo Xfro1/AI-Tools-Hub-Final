@@ -10,13 +10,13 @@ $texts = [
         'dir' => 'ltr', 'title' => 'AI Tools Hub', 'open' => 'View Details', 
         'login' => 'Login', 'logout' => 'Logout', 
         'about' => 'About Us', 'contact' => 'Contact',
-        'sections' => ['design'=>'Design', 'content'=>'Writing','coding'=>'Coding', 'video'=>'Edit Video', 'audio'=>'Audio', 'present'=>'Present', 'misc'=>'Misc']
+        'sections' => ['design'=>'Design', 'content'=>'Writing','UI/UX'=>'UI/UX','coding'=>'Coding', 'video'=>'Edit Video', 'audio'=>'Audio', 'present'=>'Present', 'misc'=>'Misc']
     ],
     'ar' => [
         'dir' => 'rtl', 'title' => 'منصة أدوات الذكاء', 'open' => 'عرض التفاصيل', 
         'login' => 'دخول', 'logout' => 'خروج',
         'about' => 'من نحن', 'contact' => 'اتصل بنا',
-        'sections' => ['design'=>'التصميم', 'content'=>'المحتوى', 'coding'=>'البرمجة', 'video'=>'إنتاج الفيديو', 'audio'=>'الصوتيات', 'present'=>'العروض التقديمية', 'misc'=>'متنوعة']
+        'sections' => ['design'=>'التصميم', 'content'=>'المحتوى', 'UI/UX'=>'UI/UX', 'coding'=>'البرمجة', 'video'=>'إنتاج الفيديو', 'audio'=>'الصوتيات', 'present'=>'العروض التقديمية', 'misc'=>'متنوعة']
     ]
 ];
 $t = $texts[$lang];
@@ -28,7 +28,7 @@ $t = $texts[$lang];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $t['title']; ?></title>
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
 
@@ -48,11 +48,12 @@ $t = $texts[$lang];
     $icons = [
         'design'  => '<i class="fa-solid fa-palette"></i>',
         'content' => '<i class="fa-solid fa-pen-nib"></i>',
-        'coding'  => '<i class="fa-solid fa-code"></i>',
+        'UI/UX' =>'<i class="fa-solid fa-window-restore"></i>',
+        'coding' => '<i class="fa-solid fa-code"></i>',
         'video'   => '<i class="fa-solid fa-clapperboard"></i>',
         'audio'   => '<i class="fa-solid fa-wave-square"></i>',
         'present' => '<i class="fa-solid fa-chart-pie"></i>',
-        'misc'    => '<i class="fa-solid fa-gears"></i>'
+        'misc'    => '<i class="fa-solid fa-gears"></i>',
     ];
 
     foreach ($t['sections'] as $key => $label):
